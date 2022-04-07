@@ -1,15 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
-import { getCurrentDate } from './utils';
-import { v4 as uuidv4 } from 'uuid';
+import logo from "./logo.svg";
+import "./App.css";
+import React from "react";
+import { getCurrentDate } from "./utils";
+import { v4 as uuidv4 } from "uuid";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       list: [],
-      textValue: '',
+      textValue: "",
     };
     this.textChangeListener = this.textChangeListener.bind(this);
     this.addTaskListener = this.addTaskListener.bind(this);
@@ -43,7 +43,7 @@ class App extends React.Component {
 
     this.setState({
       list: arr,
-      textValue: '',
+      textValue: "",
     });
   }
 
@@ -60,33 +60,37 @@ class App extends React.Component {
   //state update, update props
   render() {
     return (
-      <div>
+      <main className="main-container">
+        <h3 className="header">To Do List</h3>
         <form>
-          <h3>To Do List</h3>
-          <input
-            type='text'
-            value={this.state.textValue}
-            onChange={this.textChangeListener}
-          />
-          <button
-            onClick={this.addTaskListener}
-            disabled={!this.state.textValue.length}>
-            Add Task
-          </button>
-          {/* <button onClick={this.clearInput}>Clear Input</button> */}
-          {this.state.list.map((listItem) => {
-            return (
-              <div className='list-item' key={listItem.id}>
-                <p>{listItem.taskName}</p>
-                <p>{listItem.created}</p>
-                <button onClick={() => this.deleteTaskListener(listItem.id)}>
-                  Delete
-                </button>
-              </div>
-            );
-          })}
+          <div className="input-container">
+            <input
+              type="text"
+              value={this.state.textValue}
+              onChange={this.textChangeListener}
+            />
+            <button
+              onClick={this.addTaskListener}
+              disabled={!this.state.textValue.length}
+              className="primary"
+            >
+              Add Task
+            </button>
+          </div>
         </form>
-      </div>
+        {/* <button onClick={this.clearInput}>Clear Input</button> */}
+        <div className="list-container">
+          {this.state.list.map((listItem) => (
+            <div className="list-item" key={listItem.id}>
+              <p>{listItem.taskName}</p>
+              <p>{listItem.created}</p>
+              <button onClick={() => this.deleteTaskListener(listItem.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      </main>
     );
   }
 }
