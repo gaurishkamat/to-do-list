@@ -29,8 +29,9 @@ class App extends React.Component {
 
   addTaskListener(event, taskName) {
     event.preventDefault();
+    //.? is optional chaining
     let task = {
-      taskName,
+      taskName: taskName?.toLowerCase(),
       created: getCurrentDate(),
       id: uuidv4(),
     };
