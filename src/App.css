@@ -10,14 +10,29 @@ body {
 
 .list-item {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  border: 1px solid black;
-  margin: 5px;
+  border: 1px solid #ff2525;
+  background-color: #ffc03d;
+  border-radius: 5px;
+  color: #432344;
+  font-weight: 600;
+  margin: 10px 0px;
+  padding: 10px 15px;
+  animation: show 2s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
 }
 
 button {
   min-width: 150px;
+  font-weight: 600;
   border: none;
   border-radius: 5px;
   outline: none;
@@ -31,8 +46,15 @@ button:disabled {
 }
 
 .primary {
-  background-color: #49ac49;
-  color: #ffffff;
+  background-color: #432344;
+  color: #e7eefb;
+  flex: 1;
+}
+
+.secondary {
+  background-color: transparent;
+  border-color: #432344;
+  color: #432344;
   flex: 1;
 }
 
@@ -62,7 +84,6 @@ button:disabled {
   align-items: center;
   height: 100%;
   width: 100%;
-  border: 1px dotted blue;
 }
 
 input {
@@ -72,17 +93,31 @@ input {
 }
 
 form {
-  width: 50%;
+  width: 60%;
   display: flex;
   justify-content: center;
   margin: 10px;
   padding: 10px;
-  border: 1px solid black;
 }
 
 .list-container {
-  width: 50%;
+  width: 60%;
   margin: 10px;
   padding: 10px;
-  border: 1px solid black;
+}
+
+.task-name {
+  flex: 4;
+  margin: 0px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.created-date {
+  flex: 2;
+}
+
+.icon {
+  flex: 1;
 }

@@ -3,7 +3,10 @@ import './App.css';
 import React from 'react';
 import { getCurrentDate } from './utils';
 import { v4 as uuidv4 } from 'uuid';
+import FormComponent from './components/FormComponent';
+import ListComponent from './components/ListComponent';
 
+//class component
 class App extends React.Component {
   constructor() {
     super();
@@ -11,7 +14,6 @@ class App extends React.Component {
       list: [],
       textValue: '',
     };
-    this.textChangeListener = this.textChangeListener.bind(this);
     this.addTaskListener = this.addTaskListener.bind(this);
     this.deleteTaskListener = this.deleteTaskListener.bind(this);
   }
@@ -24,17 +26,11 @@ class App extends React.Component {
   //alt + shift + a
 
   //formal parameter
-  textChangeListener(event) {
-    let value = event.target.value;
-    this.setState({
-      textValue: value,
-    });
-  }
 
-  addTaskListener(event) {
+  addTaskListener(event, taskName) {
     event.preventDefault();
     let task = {
-      taskName: this.state.textValue,
+      taskName,
       created: getCurrentDate(),
       id: uuidv4(),
     };
@@ -62,33 +58,11 @@ class App extends React.Component {
     return (
       <main className='main-container'>
         <h3 className='header'>To Do List</h3>
-        <form>
-          <input
-            type='text'
-            value={this.state.textValue}
-            onChange={this.textChangeListener}
-          />
-          <button
-            onClick={this.addTaskListener}
-            disabled={!this.state.textValue.length}
-            className='primary'>
-            Add Task
-          </button>
-        </form>
-        {/* <button onClick={this.clearInput}>Clear Input</button> */}
-        <div className='list-container'>
-          {this.state.list.map((listItem) => (
-            <div className='list-item' key={listItem.id}>
-              <p>{listItem.taskName}</p>
-              <p>{listItem.created}</p>
-              <button
-                className='danger'
-                onClick={() => this.deleteTaskListener(listItem.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
+        <FormComponent addTaskListener={this.addTaskListener} />
+        <ListComponent
+          list={this.state.list}
+          deleteTaskListener={this.deleteTaskListener}
+        />
       </main>
     );
   }
