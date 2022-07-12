@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import { getCurrentDate } from './utils';
@@ -12,12 +11,26 @@ class App extends React.Component {
     super();
     this.state = {
       list: [],
-      textValue: '',
     };
     this.addTaskListener = this.addTaskListener.bind(this);
     this.deleteTaskListener = this.deleteTaskListener.bind(this);
   }
 
+  /* componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  static getDerivedStateFromProps() {
+    
+  }
+
+  getSnapshotBeforeUpdate() {
+    
+  } */
   /* clearInput = () => {
     this.setState({
       textValue: '',

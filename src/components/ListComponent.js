@@ -6,7 +6,10 @@ function ListComponent({ list, deleteTaskListener }) {
     <div className='list-container'>
       {list.map((listItem) => (
         <ListItemComponent
-          listItem={listItem}
+          key={listItem.id}
+          taskName={listItem.taskName}
+          id={listItem.id}
+          dateCreated={listItem.created}
           deleteTaskListener={deleteTaskListener}
         />
       ))}
