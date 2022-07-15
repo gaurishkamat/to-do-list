@@ -3,6 +3,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect } from 'react';
 import ListComponent from './ListComponent';
 import PropTypes from 'prop-types';
+import { ListItem, TaskName, CreatedDate } from '../styled';
+import { useContext } from 'react';
+import { AppContext } from '../AppContext';
 
 const ListItemComponent = ({
   id,
@@ -11,6 +14,8 @@ const ListItemComponent = ({
   deleteTaskListener,
 }) => {
   // const { id, created, taskName } = listItem;
+  const { theme } = useContext(AppContext);
+
   useEffect(() => {
     return () => {
       console.log('Component Will Unmount List Component');
@@ -18,19 +23,15 @@ const ListItemComponent = ({
   }, []);
 
   return (
-    <div className='list-item' key={id}>
-      <div title={taskName} className='task-name'>
-        {taskName}
-      </div>
-      <div className='created-date'>{dateCreated}</div>
-      <>
-        <DeleteForeverIcon
-          title='delete item'
-          className='icon'
-          sx={{ cursor: 'pointer', color: '#ff2525' }}
-          onClick={() => deleteTaskListener(id)}></DeleteForeverIcon>
-      </>
-    </div>
+    <ListItem key={id} theme={theme}>
+      <TaskName title={taskName}>{taskName}</TaskName>
+      <CreatedDate>{dateCreated}</CreatedDate>
+      <DeleteForeverIcon
+        title='delete item'
+        className='icon'
+        sx={{ cursor: 'pointer', color: '#ff2525' }}
+        onClick={() => deleteTaskListener(id)}></DeleteForeverIcon>
+    </ListItem>
   );
 };
 

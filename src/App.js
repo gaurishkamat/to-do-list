@@ -1,12 +1,17 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { getCurrentDate } from './utils';
 import { v4 as uuidv4 } from 'uuid';
 import FormComponent from './components/FormComponent';
 import ListComponent from './components/ListComponent';
-
+import { AppContext } from './AppContext';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { TableBody } from '@mui/material';
 //class component
 class App extends React.Component {
+  static contextType = AppContext;
+
   constructor() {
     super();
     this.state = {
@@ -67,17 +72,26 @@ class App extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    document.body.classList[this.context.theme === 'dark' ? 'add' : 'remove'](
+      'dark'
+    );
+  }
+
   //state update, update props
   render() {
     return (
-      <main className='main-container'>
-        <h3 className='header'>To Do List</h3>
-        <FormComponent addTaskListener={this.addTaskListener} />
-        <ListComponent
-          list={this.state.list}
-          deleteTaskListener={this.deleteTaskListener}
-        />
-      </main>
+      <div className='main-container'>
+        <Header theme={this.context.theme} setTheme={this.context.setTheme} />
+        <div className='main'>
+          <FormComponent addTaskListener={this.addTaskListener} />
+          <ListComponent
+            list={this.state.list}
+            deleteTaskListener={this.deleteTaskListener}
+          />
+        </div>
+        <Footer />
+      </div>
     );
   }
 }
